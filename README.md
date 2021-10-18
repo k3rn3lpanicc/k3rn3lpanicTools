@@ -1,7 +1,7 @@
 # k3rn3lpanicTools
  The most useful and necessary Library in C# I Created :P
 
-# AsymmetricProvider and Encryption
+# AsymmetricProvider.cs and Encryption.cs
 They are used for Encryption of course =P
 Some Examples : 
 ```C#
@@ -27,4 +27,11 @@ string dec = k3rn3lpanicTools.AsymmetricProvider.DecryptString(value, Keys.Priva
 //File part :
 k3rn3lpanicTools.AsymmetricProvider.EncryptFile(inputFilePath, outputFilePath, Keys.PublicKey);
 k3rn3lpanicTools.AsymmetricProvider.DecryptFile(inputFilePath, outputFilePath, Keys.PrivateKey);
+```
+# Archive.cs
+It is used to make Zip files out of folders or Extract them
+Example :
+```C#
+k3rn3lpanicTools.Archive.ZipFolder(FolderPath,"Zipfile.zip");
+k3rn3lpanicTools.Archive.UnZipFolder("Zipfile.zip", Decrypted_FolderName);
 ```

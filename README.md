@@ -52,6 +52,16 @@ k3rn3lpanicTools.Compiler.compileCsharpCode(Outputfilename, code, runafterCompil
 # FileASSOC.cs
 It is used to set Default program for a specific type of file (for example you can set default program of files \*.mlf to your program) , and to get the program that runs a specific type of format
 Example:
+```C#
+//setting the default program of running a .lf file :
+string myExecuteable = k3rn3lpanicTools.SystemInfo.GetInfo(SystemInfo.InfoType.ApplicationFullPath);
+k3rn3lpanicTools.FileASSOC.SetAssociation_User("lf", myExecuteable, "Test Lib.exe");
 
+//getting the default program that runs .lf files :
+string Expath = k3rn3lpanicTools.FileASSOC.FindAssocExecuteable("myfile.lf");
+
+//Check if there is a defualt program of a specific format or not :
+bool hasit k3rn3lpanicTools.FileASSOC.HasExecutable(file);
+```
 
 

@@ -91,10 +91,15 @@ This is the best part
 see the codes below : 
 ```C#
 string randomfolder = k3rn3lpanicTools.Tools.GetRandomFolder(); //gives you a random and valid(with ok permissions) folder that is not in C drive
+
 bool isitdone = k3rn3lpanicTools.Tools.ResetWindowsUserPassword(NewPass); //it will reset the password of windows to your string (Needs to be run as admin)
+
 k3rn3lpanicTools.Tools.setInStartup(); //This will set your program in startup (with registry keys) and take care of it
+
 List<Process> Whoislockingfile = k3rn3lpanicTools.Tools.WhoIsLocking(filename); //this will return a list of proccess that are using given file
+
 bool isinstartup = k3rn3lpanicTools.Tools.IsInStartup(); //returns true if your program is in startup
+
 k3rn3lpanicTools.Tools.ExecuteAsAdmin(filename); //This will run given file as administrator
 
 

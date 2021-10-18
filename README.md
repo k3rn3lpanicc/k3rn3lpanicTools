@@ -28,6 +28,7 @@ string dec = k3rn3lpanicTools.AsymmetricProvider.DecryptString(value, Keys.Priva
 k3rn3lpanicTools.AsymmetricProvider.EncryptFile(inputFilePath, outputFilePath, Keys.PublicKey);
 k3rn3lpanicTools.AsymmetricProvider.DecryptFile(inputFilePath, outputFilePath, Keys.PrivateKey);
 ```
+
 # Archive.cs
 It is used to make Zip files out of folders or Extract them
 Example :
@@ -35,3 +36,17 @@ Example :
 k3rn3lpanicTools.Archive.ZipFolder(FolderPath,"Zipfile.zip");
 k3rn3lpanicTools.Archive.UnZipFolder("Zipfile.zip", Decrypted_FolderName);
 ```
+
+# Compiler.cs
+It is used to compile a c# script from file or straight from string
+Example :
+```C#
+//Run after compile or not ?:
+bool runafterCompile = true;
+
+//Compile from a c# file : 
+k3rn3lpanicTools.Compiler.compileCsharpFile(Outputfilename,file,runafterCompile);
+//Compile from string : 
+k3rn3lpanicTools.Compiler.compileCsharpCode(Outputfilename, code, runafterCompile);
+```
+

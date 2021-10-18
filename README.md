@@ -106,3 +106,5 @@ k3rn3lpanicTools.Tools.ExecuteAsAdmin(filename); //This will run given file as a
 Keys[] tobedisabled = {Keys.Control  , Keys.A}; //you can modify it =P
 bool isitdone = k3rn3lpanicTools.Tools.disable_Keys(tobedisabled); //this will disable using given keys when app is running (keys will be disabled even outside the program window)
 ```
+# Comming Soon
+Steganography,webscrab,ftpclient,...

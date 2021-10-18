@@ -49,4 +49,9 @@ k3rn3lpanicTools.Compiler.compileCsharpFile(Outputfilename,file,runafterCompile)
 //Compile from string : 
 k3rn3lpanicTools.Compiler.compileCsharpCode(Outputfilename, code, runafterCompile);
 ```
+# FileASSOC.cs
+It is used to set Default program for a specific type of file (for example you can set default program of files \*.mlf to your program) , and to get the program that runs a specific type of format
+Example:
+
+
 

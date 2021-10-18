@@ -64,4 +64,25 @@ string Expath = k3rn3lpanicTools.FileASSOC.FindAssocExecuteable("myfile.lf");
 bool hasit k3rn3lpanicTools.FileASSOC.HasExecutable(file);
 ```
 
+# SystemInfo.cs
+It will give you almost all the information you will need about your application and system
+exp:
+```C#
+/*
+public enum InfoType {
+Machinename,
+Username,
+ApplicationFullPath,
+ApplicationFullPath2,
+CurrentDirectory,
+OSversion,
+SystemDirectory,
+IsRunasADMIN,
+AppName
+}
+ */
+ string informationyouneed = k3rn3lpanicTools.SystemInfo.GetInfo(SystemInfo.InfoType.Itemfromlistabove:P);
+ 
+ string[] args = k3rn3lpanicTools.SystemInfo.GetArgs(); //This will give you args that your file is called with
+```
 

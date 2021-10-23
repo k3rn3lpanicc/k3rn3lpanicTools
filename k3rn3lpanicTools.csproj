@@ -45,9 +45,12 @@
   <ItemGroup>
     <Compile Include="AESProvider.cs" />
     <Compile Include="Archive.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="Compiler.cs" />
+    <Compile Include="DataConvertion.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="FileASSOC.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="Steganography.cs" />
     <Compile Include="SystemInfo.cs" />
     <Compile Include="Tools.cs" />

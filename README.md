@@ -106,5 +106,8 @@ k3rn3lpanicTools.Tools.ExecuteAsAdmin(filename); //This will run given file as a
 Keys[] tobedisabled = {Keys.Control  , Keys.A}; //you can modify it =P
 bool isitdone = k3rn3lpanicTools.Tools.disable_Keys(tobedisabled); //this will disable using given keys when app is running (keys will be disabled even outside the program window)
 ```
+# Socket Programming
+You can use classes Server and Client to run a server or connect to a server that runs with this library. right now you can send bytes(wich means you can send anything) but they are just shown as string. Sending file and reciving it will be a part of this classes soon.
+
 # Comming Soon
-Steganography,webscrab,ftpclient,Socket,...
+Steganography,webscrab,ftpclient,Socket

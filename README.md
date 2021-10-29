@@ -109,8 +109,18 @@ bool isitdone = k3rn3lpanicTools.Tools.disable_Keys(tobedisabled); //this will d
 # Socket Programming
 You can use classes Server and Client to run a server or connect to a server that runs with this library. right now you can send bytes(wich means you can send anything) but they are just shown as string. Sending file and reciving it will be a part of this classes soon.
 
+# FTPClient.cs
+usage : 
+```C#
+new FTPClient("ftpserver" , "username" , "password" , isUpload).Dowork("filenametoUploadorDownload");
+```
+
+# Server and Client
+You Can use this to Create a Server or Connect to a server as a Client.
+
+
 # Comming Soon
-Steganography,webscrab,ftpclient,Socket
+Steganography,webscrab
 
 <div align="center">
   

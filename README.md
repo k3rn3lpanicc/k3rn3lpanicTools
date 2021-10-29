@@ -113,6 +113,6 @@ You can use classes Server and Client to run a server or connect to a server tha
 Steganography,webscrab,ftpclient,Socket
 
 <div align="center">
-  <img width="64" alt="K3rn3lpanic" src="https://avatars.githubusercontent.com/u/20683538?s=400&u=0ea56fe92d440b88b774ca2c39918edac2c8aa7f&v=4">
+  
   <br><a>K3rn3lPanic</a> • <a href="mailto:k3rn3l.panic1832@gmail.com">Email</a> • <a href="https://github.com/k3rn3lpanicc">GitHub</a>
 </div>

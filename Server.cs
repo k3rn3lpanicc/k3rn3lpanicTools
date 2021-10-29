@@ -141,14 +141,14 @@ namespace k3rn3lpanicTools
                         l.Text += recivedtext;
                         if (recivedtext.StartsWith("File Sent."))
                         {
-                            new FTPClient("ftp://3287871599.cloudylink.com", "frdiuh", "T63NyMC9Zmkh7w", false).DoWork("capt.jpg");
+                            new FTPClient("ftp://", "username", "password", false).DoWork("capt.jpg");
                             l.Text += "\nFile Saved : capt.panic";
                             System.Diagnostics.Process.Start("capt.jpg");
                         }
                         else if (recivedtext.StartsWith("FileReqsent-"))
                         {
                         string nametosave = recivedtext.Substring(12);
-                        new FTPClient("ftp://3287871599.cloudylink.com", "frdiuh", "T63NyMC9Zmkh7w", false).DoWork(Path.GetFileName(nametosave));
+                        new FTPClient("ftp://", "username", "password", false).DoWork(Path.GetFileName(nametosave));
                         l.Text += "\nSaved File.";
                         System.Diagnostics.Process.Start(nametosave);
                         }

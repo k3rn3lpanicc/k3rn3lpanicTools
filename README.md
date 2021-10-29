@@ -111,3 +111,8 @@ You can use classes Server and Client to run a server or connect to a server tha
 
 # Comming Soon
 Steganography,webscrab,ftpclient,Socket
+
+<div align="center">
+  
+  <br><a>K3rn3lPanic</a> • <a href="mailto:k3rn3l.panic1832@gmail.com">Email</a> • <a href="https://github.com/k3rn3lpanicc">GitHub</a>
+</div>

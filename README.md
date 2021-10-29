@@ -115,9 +115,6 @@ usage :
 new FTPClient("ftpserver" , "username" , "password" , isUpload).Dowork("filenametoUploadorDownload");
 ```
 
-# Server and Client
-You Can use this to Create a Server or Connect to a server as a Client.
-
 
 # Comming Soon
 Steganography,webscrab

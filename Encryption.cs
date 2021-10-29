@@ -198,62 +198,82 @@ namespace k3rn3lpanicTools
         }
         public class StringEnc
         {
-            /// <summary>
-            /// K3rn3lPanic 2021
-            /// AES Encryption for strings
-            /// </summary>
-            /// <param name="clearText">The Text u want to encrypt.</param>
-            /// <param name="password">Set the password for encryption</param>
-            /// <returns>Encrypted Text</returns>
-            public static string AES_Encryptstr(string clearText, string password)
+
+            public static string Encrypt(string secureUserData, bool useHashing)
             {
-                string EncryptionKey = password;
-                byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
-                using (Aes encryptor = Aes.Create())
+                byte[] keyArray;
+                byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(secureUserData);
+                string key = string.Empty;
+                byte[] resultArray;
+
+                // Get the key from Web.Config file
+                //key = ConfigurationManager.AppSettings.Get("EncKey");
+                key = "MAKV2SPBNI99212";
+
+
+                if (useHashing)
                 {
-                    Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                    encryptor.Key = pdb.GetBytes(32);
-                    encryptor.IV = pdb.GetBytes(16);
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                        {
-                            cs.Write(clearBytes, 0, clearBytes.Length);
-                            cs.Close();
-                        }
-                        clearText = Convert.ToBase64String(ms.ToArray());
-                    }
+
+                    MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+                    keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                    hashmd5.Clear();
+
                 }
-                return clearText;
+                else
+                {
+                    keyArray = UTF8Encoding.UTF8.GetBytes(key);
+                }
+
+                TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+                tdes.Key = keyArray;
+                tdes.Mode = CipherMode.ECB;
+                tdes.Padding = PaddingMode.PKCS7;
+
+                ICryptoTransform cTransform = tdes.CreateEncryptor();
+
+                resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+                tdes.Clear();
+
+                return Convert.ToBase64String(resultArray, 0, resultArray.Length);
             }
-            /// <summary>
-            /// K3rn3lPanic 2021
-            /// AES Decryption method using a password
-            /// </summary>
-            /// <param name="cipherText">The Encrypted text u wish to decrypt</param>
-            /// <param name="password">The password to be used in Decryption</param>
-            /// <returns>Decrypted Text</returns>
-            public static string AES_Decryptstr(string cipherText, string password)
+            public static string Decrypt(string cipherString, bool useHashing)
             {
-                string EncryptionKey = password;
-                cipherText = cipherText.Replace(" ", "+");
-                byte[] cipherBytes = Convert.FromBase64String(cipherText);
-                using (Aes encryptor = Aes.Create())
+                byte[] keyArray;
+                byte[] toEncryptArray = Convert.FromBase64String(cipherString);
+                byte[] resultArray;
+                string key = string.Empty;
+
+                //key = ConfigurationManager.AppSettings.Get("SecurityKey"); 
+                key = "MAKV2SPBNI99212";
+
+
+                if (useHashing)
                 {
-                    Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                    encryptor.Key = pdb.GetBytes(32);
-                    encryptor.IV = pdb.GetBytes(16);
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                        {
-                            cs.Write(cipherBytes, 0, cipherBytes.Length);
-                            cs.Close();
-                        }
-                        cipherText = Encoding.Unicode.GetString(ms.ToArray());
-                    }
+                    MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+                    keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                    hashmd5.Clear();
                 }
-                return cipherText;
+                else
+                {
+                    keyArray = UTF8Encoding.UTF8.GetBytes(key);
+                }
+
+                TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+                tdes.Key = keyArray;
+                tdes.Mode = CipherMode.ECB;
+                tdes.Padding = PaddingMode.PKCS7;
+
+
+                ICryptoTransform cTransform = tdes.CreateDecryptor();
+                resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+
+                tdes.Clear();
+
+
+                return UTF8Encoding.UTF8.GetString(resultArray);
+
             }
         }
         public class Hashing {

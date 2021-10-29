@@ -1,0 +1,6 @@
+C:\Users\Matin\source\repos\k3rn3lpanicTools\k3rn3lpanicTools\bin\x86\Debug\k3rn3lpanicTools.dll
+C:\Users\Matin\source\repos\k3rn3lpanicTools\k3rn3lpanicTools\bin\x86\Debug\k3rn3lpanicTools.pdb
+C:\Users\Matin\source\repos\k3rn3lpanicTools\k3rn3lpanicTools\bin\x86\Debug\ChilkatDotNet46.dll
+C:\Users\Matin\source\repos\k3rn3lpanicTools\k3rn3lpanicTools\obj\x86\Debug\k3rn3lpanicTools.csproj.CoreCompileInputs.cache
+C:\Users\Matin\source\repos\k3rn3lpanicTools\k3rn3lpanicTools\obj\x86\Debug\k3rn3lpanicTools.dll
+C:\Users\Matin\source\repos\k3rn3lpanicTools\k3rn3lpanicTools\obj\x86\Debug\k3rn3lpanicTools.pdb

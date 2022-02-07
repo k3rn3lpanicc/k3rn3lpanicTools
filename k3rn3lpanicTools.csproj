@@ -59,9 +59,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
@@ -76,6 +76,7 @@
     <Compile Include="Encryption.cs" />
     <Compile Include="FileASSOC.cs" />
     <Compile Include="FTPClient.cs" />
+    <Compile Include="FTPinfo.cs" />
     <Compile Include="Networkinfo.cs" />
     <Compile Include="RegisteryWatcher.cs" />
     <Compile Include="Server.cs" />

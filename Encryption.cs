@@ -27,6 +27,7 @@ namespace k3rn3lpanicTools
             public static byte[] getSalt()
             {
                 return salt;
+                
             }
 
             /// <summary>
@@ -199,16 +200,11 @@ namespace k3rn3lpanicTools
         public class StringEnc
         {
 
-            public static string Encrypt(string secureUserData, bool useHashing)
+            public static string Encrypt(string secureUserData , string key , bool useHashing=true)
             {
                 byte[] keyArray;
                 byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(secureUserData);
-                string key = string.Empty;
                 byte[] resultArray;
-
-                // Get the key from Web.Config file
-                //key = ConfigurationManager.AppSettings.Get("EncKey");
-                key = "MAKV2SPBNI99212";
 
 
                 if (useHashing)
@@ -237,17 +233,12 @@ namespace k3rn3lpanicTools
 
                 return Convert.ToBase64String(resultArray, 0, resultArray.Length);
             }
-            public static string Decrypt(string cipherString, bool useHashing)
+            public static string Decrypt(string cipherString , string key , bool useHashing = true)
             {
                 byte[] keyArray;
                 byte[] toEncryptArray = Convert.FromBase64String(cipherString);
                 byte[] resultArray;
-                string key = string.Empty;
-
-                //key = ConfigurationManager.AppSettings.Get("SecurityKey"); 
-                key = "MAKV2SPBNI99212";
-
-
+          
                 if (useHashing)
                 {
                     MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();

